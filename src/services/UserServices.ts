@@ -3,8 +3,11 @@ import { User } from "../entities/User"
 import { UsersRepository } from "../repositories/UsersRepository"
 
 class UserServices {
-  private  usersRepository: Repository<User>
-  constructor (){
+  findByEmail(email: any) {
+    throw new Error('Method not implemented.')
+  }
+  private usersRepository: Repository<User>
+  constructor() {
     this.usersRepository = getCustomRepository(UsersRepository)
   }
   async create(email: string) {
@@ -12,23 +15,15 @@ class UserServices {
     const userExists = await this.usersRepository.findOne({
       email
     })
-
-
-    if(userExists){
+    if (userExists) {
       return userExists
     }
-
     const user = this.usersRepository.create({
       email
     })
-
     await this.usersRepository.save(user)
-
     return user
   }
-
-
-  
 }
 
 export { UserServices }
