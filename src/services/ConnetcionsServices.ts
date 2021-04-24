@@ -27,6 +27,14 @@ class ConnectionsServices{
 
     await this.connectionsRepository.save(connection)
   }
+  async findByUserId(user_id: string){
+    const connection = await this.connectionsRepository.findOne({
+      user_id
+    })
+
+    return connection
+  }
+
 }
 
 export {ConnectionsServices}
